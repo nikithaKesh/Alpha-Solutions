@@ -328,16 +328,6 @@
     }
     .btn-secondary:hover { border-color: var(--border-glow-blue); background: var(--surface-strong); }
 
-    .trust-strip { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; align-items: center;}
-    .trust-item {
-      border: 1px solid var(--border-soft); background: var(--surface-glass);
-      padding: 10px 14px; border-radius: 999px; color: var(--text-muted);
-      backdrop-filter: blur(14px); box-shadow: var(--shadow-sm); font-size: 0.9rem;
-      display: inline-flex; align-items: center; gap: 6px;
-    }
-    .trust-item svg { width: 16px; height: 16px; stroke: var(--primary-cyan); }
-    .trust-label { font-size: 0.85rem; color: var(--text-muted); margin-right: 8px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
-
     /* Interactive Dual Panel */
     .hero-visual { position: relative; min-height: 620px; display: grid; place-items: center; }
     .hero-dual-panel {
@@ -781,7 +771,7 @@
       .reveal { opacity: 1; transform: none; }
     }
   </style>
-  
+
   <style id="design-refinement">
     /* Core variable overrides for the specific premium dark look requested */
     :root {
@@ -1396,13 +1386,6 @@
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary" data-track="cta-click">Book a Discovery Call</a>
           <a href="#portfolio" class="btn btn-secondary">View Our Work</a>
-        </div>
-
-        <div class="trust-strip">
-          <span class="trust-label">Trusted By Growing Brands:</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Cosmetics</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Hotels</span>
-          <span class="trust-item"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><path d="M3 9h18M9 21V9"/></svg> Retail</span>
         </div>
       </div>
 
