@@ -174,21 +174,21 @@
       transition: opacity .5s ease, visibility .5s ease;
     }
     .preloader.hide { opacity: 0; visibility: hidden; }
-    .loader-mark { display: grid; gap: 12px; place-items: center; }
-    .loader-logo {
-      width: 64px; height: 64px; border-radius: 20px;
-      background: linear-gradient(135deg, color-mix(in srgb, var(--primary-cyan) 30%, transparent), color-mix(in srgb, var(--accent-yellow) 30%, transparent));
-      border: 1px solid var(--border-soft);
-      box-shadow: 0 18px 60px color-mix(in srgb, var(--primary-cyan) 20%, transparent);
-      position: relative; overflow: hidden; backdrop-filter: blur(16px);
+    .loader-mark { display: grid; gap: 16px; place-items: center; }
+    
+    .loader-logo-img {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      animation: logo-pulse 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      filter: drop-shadow(0 0 12px color-mix(in srgb, var(--primary-cyan) 50%, transparent));
     }
-    .loader-logo::before, .loader-logo::after {
-      content: ""; position: absolute; inset: 10px; border-radius: 16px; border: 1px solid color-mix(in srgb, white 10%, var(--border-soft));
+    
+    @keyframes logo-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 16px color-mix(in srgb, var(--primary-cyan) 60%, transparent)); }
+      50% { transform: scale(0.92); opacity: 0.65; filter: drop-shadow(0 0 4px color-mix(in srgb, var(--primary-cyan) 20%, transparent)); }
     }
-    .loader-logo::after {
-      inset: 18px; background: linear-gradient(135deg, var(--primary-cyan), var(--accent-yellow));
-      mask: linear-gradient(135deg, transparent 24%, black 24% 76%, transparent 76%);
-    }
+
     .loader-text { color: var(--text-muted); font-size: 0.95rem; letter-spacing: .14em; text-transform: uppercase; }
 
     /* Layout & Typography */
@@ -988,7 +988,7 @@
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
     <div class="loader-mark">
-      <div class="loader-logo"></div>
+      <img src="assets/brand/brand.webp" alt="Alpha Solutions" class="loader-logo-img" />
       <div class="loader-text">Alpha Solutions</div>
     </div>
   </div>
