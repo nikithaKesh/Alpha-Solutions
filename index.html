@@ -432,7 +432,7 @@
     .services-panel.active { display: block; animation: fadeIn .35s ease; }
     .services-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
     
-    .service-card { padding: 22px; display: grid; gap: 16px; min-height: 220px; position: relative; }
+    .service-card { padding: 22px; display: flex; flex-direction: column; gap: 16px; min-height: 220px; position: relative; }
     .service-ideal { font-size: 0.75rem; color: var(--text-muted); margin-top: auto; font-style: italic; border-top: 1px solid var(--border-soft); padding-top: 10px;}
     #digital-services .service-card:hover { transform: translateY(-6px); border-color: var(--border-glow-blue); box-shadow: 0 12px 40px rgba(0, 153, 255, 0.15); }
     #graphic-services .service-card:hover { transform: translateY(-6px); border-color: var(--border-glow-yellow); box-shadow: 0 12px 40px rgba(255, 204, 0, 0.15); }
@@ -482,6 +482,7 @@
     .tag { padding: 6px 10px; border-radius: 999px; font-size: .75rem; border: 1px solid var(--border-soft); background: var(--surface-soft); font-weight: 600;}
     .tag.digital { color: var(--primary-cyan); border-color: color-mix(in srgb, var(--primary-cyan) 30%, transparent); }
     .tag.graphic { color: var(--accent-yellow); border-color: color-mix(in srgb, var(--accent-yellow) 30%, transparent);}
+    .tag.ota { color: #bb86fc; border-color: rgba(187, 134, 252, 0.3); } /* Unique color for OTA tag */
     .portfolio-metrics { margin-top: auto; border-top: 1px solid var(--border-soft); padding-top: 12px; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); }
     .portfolio-metrics strong { color: var(--primary-cyan); }
 
@@ -857,19 +858,25 @@
       padding: 10px;
       justify-content: center;
     }
+    
+    /* ====== LOGO PURE WHITE SILHOUETTE ====== */
     .logo-chip img {
-      max-width: 112px;
-      max-height: 32px;
-      width: auto;
-      height: auto;
+      max-width: 100px;
+      max-height: 40px;
+      width: 100%;
+      height: 100%;
       object-fit: contain;
-      filter: grayscale(1) brightness(1.95) contrast(0.94);
-      opacity: 0.88;
+      filter: brightness(0) invert(1);
+      opacity: 0.75;
+      transition: all 0.3s ease;
     }
     .logo-chip:hover img {
       opacity: 1;
-      filter: grayscale(1) brightness(2.12) contrast(0.96);
+      filter: brightness(0) invert(1);
+      transform: scale(1.05);
     }
+    /* ======================================== */
+
     .logo-chip span {
       margin-top: 0;
       font-size: 0.72rem;
@@ -1138,6 +1145,31 @@
     </div>
   </div>
 
+  <div class="legal-page-overlay" id="otaSitesOverlay">
+    <header class="legal-page-header">
+      <button class="legal-back-btn closeOverlayBtn" data-target="otaSitesOverlay">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Back to Services
+      </button>
+      <h2 style="margin:0; font-size: 1.8rem;">Supported OTA Platforms</h2>
+    </header>
+    <div class="legal-content-area">
+      <p>We provide full setup, login management, extranet configuration, and optimization for property owners across the following major travel networks:</p>
+      <ul style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; list-style: none; padding: 0; margin-top: 30px;">
+        <li><a href="https://www.booking.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Booking.com</a></li>
+        <li><a href="https://extranet.emergingtravel.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Emerging Travel</a></li>
+        <li><a href="https://ycs.agoda.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Agoda</a></li>
+        <li><a href="https://apps.expediapartnercentral.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Expedia</a></li>
+        <li><a href="https://www.goseek.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">GoSeek</a></li>
+        <li><a href="https://www.tripadvisor.in/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">TripAdvisor</a></li>
+        <li><a href="https://ostrovok.ru/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Ostrovok</a></li>
+        <li><a href="https://hostelworld.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Hostelworld</a></li>
+        <li><a href="https://www.airbnb.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Airbnb</a></li>
+        <li><a href="https://www.hotels.com/" target="_blank" class="btn btn-secondary" style="width: 100%; justify-content: flex-start;">Hotels.com</a></li>
+      </ul>
+    </div>
+  </div>
+
   <header class="topbar" id="topbar">
     <nav class="nav" id="navbar" aria-label="Main navigation">
       <a href="#home" class="brand" aria-label="Alpha Solutions home">
@@ -1379,6 +1411,21 @@
               </div>
               <div class="service-ideal">Ideal for: Businesses needing peace of mind.</div>
             </article>
+
+            <article class="service-card glass-card">
+              <div class="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h3>OTA Setup & Management</h3>
+                <p class="muted">Extranet profile creation, synchronization, and hosting management across all major travel platforms.</p>
+              </div>
+              <button class="btn btn-secondary openOverlayBtn" data-target="otaSitesOverlay" style="margin-top:auto; padding: 10px; font-size: 0.85rem; width: 100%;">View Supported Platforms</button>
+            </article>
+
           </div>
         </div>
 
@@ -1527,6 +1574,7 @@
           <button class="chip" data-filter="digital">Alpha Digital</button>
           <button class="chip" data-filter="graphic">Alpha Graphix</button>
           <button class="chip" data-filter="automation">Automation & Workflows</button>
+          <button class="chip" data-filter="ota">OTA Management</button>
         </div>
 
         <div class="portfolio-grid" id="portfolioGrid">
@@ -1671,6 +1719,84 @@
               <div class="portfolio-metrics">
                 <span>Highlight:</span>
                 <strong>Website launch</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-card glass-card" data-category="ota" tabindex="0"
+            data-brand="Chill Tangalle Villa"
+            data-tags="ota,digital"
+            data-challenge="The property required a structured OTA setup to manage bookings and visibility across major travel platforms."
+            data-approach="We configured their extranet profiles, synced availability, and established their hosting presence on Booking.com."
+            data-outcome="Live OTA management and listing optimization."
+            data-tools="OTA Management, Booking.com, Profile Setup"
+            data-media-kind="image"
+            data-media="assets/brand/brand.webp"
+            data-link="https://www.booking.com/Share-gHQU9G"
+            data-link-label="View on Booking.com">
+            <div class="portfolio-visual">
+              <div style="width:100%; height:100%; background:linear-gradient(45deg, #0e63ff, #4bb8ff); opacity:0.1; position:absolute;"></div>
+              <h3 style="z-index:1; color:var(--primary-cyan);">Chill Tangalle</h3>
+            </div>
+            <div class="portfolio-body">
+              <div class="tag-row"><span class="tag ota">OTA Management</span><span class="tag digital">Alpha Digital</span></div>
+              <h3>Chill Tangalle Villa</h3>
+              <p class="muted" style="flex-grow: 1;">Complete OTA hosting setup and management for Chill Tangalle Villa.</p>
+              <div class="portfolio-metrics">
+                <span>Highlight:</span>
+                <strong>Live Listing</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-card glass-card" data-category="ota" tabindex="0"
+            data-brand="OLA Tangalle Hotel (OTA)"
+            data-tags="ota,digital"
+            data-challenge="Alongside the main website, the hotel needed robust OTA platform integrations to capture direct extranet bookings."
+            data-approach="We managed the backend property setup for their Booking.com profile to ensure accurate listing details and rates."
+            data-outcome="Active OTA presence and property synchronization."
+            data-tools="OTA Management, Booking.com"
+            data-media-kind="image"
+            data-media="assets/brand/brand.webp"
+            data-link="https://www.booking.com/Share-h20E7k"
+            data-link-label="View on Booking.com">
+            <div class="portfolio-visual">
+              <div style="width:100%; height:100%; background:linear-gradient(45deg, #0e63ff, #4bb8ff); opacity:0.1; position:absolute;"></div>
+              <h3 style="z-index:1; color:var(--primary-cyan);">OLA Tangalle</h3>
+            </div>
+            <div class="portfolio-body">
+              <div class="tag-row"><span class="tag ota">OTA Management</span><span class="tag digital">Alpha Digital</span></div>
+              <h3>OLA Tangalle Hotel (OTA)</h3>
+              <p class="muted" style="flex-grow: 1;">Travel extranet hosting setup and optimization for OLA Tangalle.</p>
+              <div class="portfolio-metrics">
+                <span>Highlight:</span>
+                <strong>Live Listing</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="portfolio-card glass-card" data-category="ota" tabindex="0"
+            data-brand="Yatadola Eco Villa"
+            data-tags="ota,digital"
+            data-challenge="Yatadola Eco Villa required setup and optimization for their social and travel booking presence."
+            data-approach="Managed the configuration of their business profile and online presence for direct guest acquisition."
+            data-outcome="Optimized hosting profile and visibility."
+            data-tools="Social Profile Setup, OTA Support"
+            data-media-kind="image"
+            data-media="assets/brand/brand.webp"
+            data-link="https://www.facebook.com/yatadolaecovilla/"
+            data-link-label="View Profile">
+            <div class="portfolio-visual">
+              <div style="width:100%; height:100%; background:linear-gradient(45deg, #0e63ff, #4bb8ff); opacity:0.1; position:absolute;"></div>
+              <h3 style="z-index:1; color:var(--primary-cyan);">Yatadola</h3>
+            </div>
+            <div class="portfolio-body">
+              <div class="tag-row"><span class="tag ota">OTA Management</span><span class="tag digital">Alpha Digital</span></div>
+              <h3>Yatadola Eco Villa</h3>
+              <p class="muted" style="flex-grow: 1;">Online presence and platform setup for Yatadola Eco Villa.</p>
+              <div class="portfolio-metrics">
+                <span>Highlight:</span>
+                <strong>Active Presence</strong>
               </div>
             </div>
           </article>
@@ -2120,7 +2246,7 @@
           </div>
         </aside>
 
-        <form class="contact-card glass-card reveal" id="inquiryForm" action="https://formspree.io/f/your_form_id_here" method="POST">
+        <form class="contact-card glass-card reveal" id="inquiryForm" action="https://formspree.io/f/mnjolvnw" method="POST">
           <div class="form-grid">
             
             <label style="margin-bottom: 8px;">
@@ -2426,7 +2552,8 @@
         const tagLabelMap = {
           digital: 'Alpha Digital',
           graphic: 'Alpha Graphix',
-          automation: 'Automation'
+          automation: 'Automation',
+          ota: 'OTA Management'
         };
         data.tags.split(',').map(t => t.trim()).filter(Boolean).forEach(t => {
           const span = document.createElement('span');
