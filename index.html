@@ -976,39 +976,56 @@
 
   <style id="mobile-horizontal-scroll-redesign">
     /* =========================================
-       MOBILE REDESIGN - HORIZONTAL SCROLLING
+       MOBILE REDESIGN - NO HORIZONTAL SCROLLING
        ========================================= */
     @media (max-width: 840px) {
-      /* Prevent horizontal page scrolling, but allow animations to trigger properly */
       body { overflow-x: hidden; }
-      /* (Removed the buggy overflow: hidden from .section) */
       .container { overflow: visible; }
 
-      /* 1. SERVICES SCROLL */
+      /* 1. SERVICES REDESIGN - Responsive Vertical Grid */
       .services-grid {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 16px !important;
-        /* Full-bleed edges */
-        margin-left: -16px;
-        margin-right: -16px;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-bottom: 24px;
-        scrollbar-width: none;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: visible !important;
+        scroll-snap-type: none;
       }
-      .services-grid::-webkit-scrollbar { display: none; }
       .service-card {
-        flex: 0 0 85% !important;
-        width: 85%; /* Bulletproof iOS fallback */
-        max-width: 320px;
-        scroll-snap-align: center;
+        flex: none !important;
+        width: 100% !important;
+        max-width: none !important;
+        scroll-snap-align: none;
       }
 
-      /* 2. TIMELINE SCROLL */
+      /* 3. PORTFOLIO REDESIGN - Sticky Stacking Cards */
+      .portfolio-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+        overflow-x: visible !important;
+        scroll-snap-type: none;
+      }
+      .portfolio-card {
+        position: sticky !important;
+        top: 100px !important; /* Sticks just below the mobile nav */
+        flex: none !important;
+        width: 100% !important;
+        max-width: none !important;
+        scroll-snap-align: none;
+        box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.8) !important; /* Deep shadow over the card below */
+        border-top: 1px solid rgba(0, 153, 255, 0.4) !important; /* Glow accent for the stacking edge */
+      }
+      .portfolio-card.hidden { display: none !important; }
+
+      /* OTHER ELEMENTS (Timeline, Team, Testimonials) remaining as horizontal scrolls for contrast */
       .timeline {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1031,32 +1048,6 @@
         scroll-snap-align: center;
       }
 
-      /* 3. PORTFOLIO SCROLL */
-      .portfolio-grid {
-        display: flex !important;
-        flex-wrap: nowrap !important;
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        scroll-snap-type: x mandatory;
-        gap: 16px !important;
-        margin-left: -16px;
-        margin-right: -16px;
-        padding-left: 16px;
-        padding-right: 16px;
-        padding-bottom: 32px;
-        scrollbar-width: none;
-      }
-      .portfolio-grid::-webkit-scrollbar { display: none; }
-      .portfolio-card {
-        flex: 0 0 85% !important;
-        width: 85%;
-        max-width: 340px;
-        scroll-snap-align: center;
-      }
-      /* Ensure filters still hide items but don't break flex flow */
-      .portfolio-card.hidden { display: none !important; }
-
-      /* 4. TESTIMONIALS SCROLL */
       .testimonial-track {
         display: flex !important;
         flex-direction: row !important;
@@ -1078,11 +1069,10 @@
         width: 88%;
         max-width: 340px;
         scroll-snap-align: center;
-        transform: none !important; /* overrides previous desktop odd/even transforms */
+        transform: none !important;
       }
       .testimonial:nth-child(even) { transform: none !important; }
 
-      /* 5. TEAM SCROLL */
       .team-grid {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1105,7 +1095,6 @@
         scroll-snap-align: center;
       }
 
-      /* OTA Logos inside Modal - horizontal scroll adjustment */
       .legal-content-area ul {
         display: flex !important;
         flex-wrap: nowrap !important;
@@ -1129,14 +1118,18 @@
     }
 
     @media (max-width: 600px) {
-      /* Fine-tuning for smaller phones */
-      .services-grid, .timeline, .portfolio-grid, .testimonial-track, .team-grid {
+      /* Force single column for Services on small mobile screens */
+      .services-grid {
+        grid-template-columns: 1fr !important; 
+      }
+      
+      .timeline, .testimonial-track, .team-grid {
         margin-left: -10px;
         margin-right: -10px;
         padding-left: 10px;
         padding-right: 10px;
       }
-      .service-card, .timeline-card, .portfolio-card, .testimonial {
+      .timeline-card, .testimonial {
         flex: 0 0 88% !important;
         width: 88%;
       }
@@ -1150,7 +1143,27 @@
       }
     }
   </style>
-
+  <style id="mobile-overflow-fix">
+    html, body {
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+    body {
+      overflow-wrap: break-word;
+    }
+    .contact-item a {
+      word-break: break-all;
+    }
+    
+    /* PREVENT CSS GRID BLOWOUT ON MOBILE */
+    .section-grid > *,
+    .credibility-container > *,
+    .about-grid > *,
+    .contact-grid > *,
+    .hero-grid > * {
+      min-width: 0;
+    }
+  </style>
 </head>
 <body>
   <div class="preloader" id="preloader" aria-hidden="true">
@@ -2396,12 +2409,12 @@
           <div class="contact-item" style="margin-top: 10px; background: linear-gradient(145deg, var(--surface-soft), transparent);">
             <strong>Headquarters</strong>
             <address class="muted" style="font-style: normal; margin-top: 6px; line-height: 1.6;">
-              Alpha Graphix PVT Ltd<br>
-              Moragasmulla, Rajagiriya<br>
+              Colombo Innovation Hub<br>
+              Colombo 03, Western Province<br>
               Sri Lanka
             </address>
             <span class="muted" style="display: block; margin-top: 12px; font-size: 0.85rem;">
-              <strong style="color: var(--primary-cyan);">Hours:</strong> Mon - Fri, 8:00 AM - 9:00 PM (LKT)
+              <strong style="color: var(--primary-cyan);">Hours:</strong> Mon - Fri, 9:00 AM - 6:00 PM (LKT)
             </span>
           </div>
         </aside>
