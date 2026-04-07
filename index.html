@@ -1001,11 +1001,12 @@
         scroll-snap-align: none;
       }
 
-      /* 3. PORTFOLIO REDESIGN - Sticky Stacking Cards */
+      /* 3. PORTFOLIO REDESIGN - Standard Vertical Stack */
+      /* FIXED: Removed buggy sticky positioning that caused items to overlap and disappear */
       .portfolio-grid {
         display: flex !important;
         flex-direction: column !important;
-        gap: 32px !important;
+        gap: 24px !important;
         margin-left: 0;
         margin-right: 0;
         padding-left: 0;
@@ -1014,14 +1015,11 @@
         scroll-snap-type: none;
       }
       .portfolio-card {
-        position: sticky !important;
-        top: 100px !important; /* Sticks just below the mobile nav */
+        position: relative !important;
         flex: none !important;
         width: 100% !important;
         max-width: none !important;
         scroll-snap-align: none;
-        box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.8) !important; /* Deep shadow over the card below */
-        border-top: 1px solid rgba(0, 153, 255, 0.4) !important; /* Glow accent for the stacking edge */
       }
       .portfolio-card.hidden { display: none !important; }
 
