@@ -1001,11 +1001,10 @@
         scroll-snap-align: none;
       }
 
-      /* 3. PORTFOLIO REDESIGN - Standard Vertical Stack */
-      /* FIXED: Removed buggy sticky positioning that caused items to overlap and disappear */
+/* 3. PORTFOLIO REDESIGN - Standard Vertical Stack */
       .portfolio-grid {
-        display: flex !important;
-        flex-direction: column !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important; /* Forces a robust single column */
         gap: 24px !important;
         margin-left: 0;
         margin-right: 0;
@@ -1016,13 +1015,13 @@
       }
       .portfolio-card {
         position: relative !important;
-        flex: none !important;
         width: 100% !important;
         max-width: none !important;
         scroll-snap-align: none;
+        /* Removed flex: none !important as it was causing the height collapse */
       }
       .portfolio-card.hidden { display: none !important; }
-
+      
       /* OTHER ELEMENTS (Timeline, Team, Testimonials) remaining as horizontal scrolls for contrast */
       .timeline {
         display: flex !important;
